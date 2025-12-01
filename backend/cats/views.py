@@ -14,7 +14,6 @@ class CatViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
 
-
 class AchievementViewSet(viewsets.ModelViewSet):
     queryset = Achievement.objects.all()
     serializer_class = AchievementSerializer

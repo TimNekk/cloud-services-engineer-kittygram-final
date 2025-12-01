@@ -2,7 +2,7 @@
 
 from django.conf import settings
 from django.db import migrations, models
-import django.db.models.deletion
+from django.db.models import deletion
 
 
 class Migration(migrations.Migration):
@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
                     verbose_name='ID'
                 )),
                 ('achievement', models.ForeignKey(
-                    on_delete=django.db.models.deletion.CASCADE,
+                    on_delete=deletion.CASCADE,
                     to='cats.achievement'
                 )),
             ],
@@ -63,7 +63,7 @@ class Migration(migrations.Migration):
                     to='cats.Achievement'
                 )),
                 ('owner', models.ForeignKey(
-                    on_delete=django.db.models.deletion.CASCADE,
+                    on_delete=deletion.CASCADE,
                     related_name='cats',
                     to=settings.AUTH_USER_MODEL
                 )),
@@ -73,7 +73,7 @@ class Migration(migrations.Migration):
             model_name='achievementcat',
             name='cat',
             field=models.ForeignKey(
-                on_delete=django.db.models.deletion.CASCADE,
+                on_delete=deletion.CASCADE,
                 to='cats.cat'
             ),
         ),
