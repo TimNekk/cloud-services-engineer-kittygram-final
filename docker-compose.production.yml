@@ -8,7 +8,7 @@ services:
       - kittygram_network
 
   backend:
-    image: TimNekk/kittygram_backend:latest
+    image: timnekk/kittygram_backend:latest
     env_file: .env
     volumes:
       - static:/app/collected_static
@@ -19,12 +19,12 @@ services:
       - kittygram_network
 
   frontend:
-    image: TimNekk/kittygram_frontend:latest
+    image: timnekk/kittygram_frontend:latest
     networks:
       - kittygram_network
 
   gateway:
-    image: TimNekk/kittygram_gateway:latest
+    image: timnekk/kittygram_gateway:latest
     ports:
       - "80:80"
     volumes:
