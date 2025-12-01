@@ -57,16 +57,25 @@ TEMPLATES = [
 WSGI_APPLICATION = "kittygram_backend.wsgi.application"
 
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("POSTGRES_DB"),
-        "USER": os.getenv("POSTGRES_USER"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
-        "HOST": os.getenv("DB_HOST", "postgres"),
-        "PORT": os.getenv("DB_PORT", "5432"),
+# Используем SQLite для тестов, если переменные PostgreSQL не установлены
+if os.getenv("POSTGRES_DB"):
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("POSTGRES_DB"),
+            "USER": os.getenv("POSTGRES_USER"),
+            "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+            "HOST": os.getenv("DB_HOST", "postgres"),
+            "PORT": os.getenv("DB_PORT", "5432"),
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 
 # Password validation
