@@ -1,14 +1,46 @@
 services:
-  backend:
-    image:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
+  postgres:
+    image: postgres:13.10
+    env_file: .env
     volumes:
-      - ./backend:/app
-    environment:
-      - DEBUG=False
-      - SECRET_KEY=django-insecure-cg6*%6d51ef8f#4!r3*$vmxm4)abgjw8mo!4y-q*uq1!4$-89$
-      - POSTGRES_DB=kittygram
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - kittygram_network
+
+  backend:
+    image: TimNekk/kittygram_backend:latest
+    env_file: .env
+    volumes:
+      - static:/app/collected_static
+      - media:/app/media
+    depends_on:
+      - postgres
+    networks:
+      - kittygram_network
+
+  frontend:
+    image: TimNekk/kittygram_frontend:latest
+    networks:
+      - kittygram_network
+
+  gateway:
+    image: TimNekk/kittygram_gateway:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./static:/static
+      - ./media:/media
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - kittygram_network
+
+volumes:
+  pg_data:
+  static:
+  media:
+
+networks:
+  kittygram_network:
+    driver: bridge
