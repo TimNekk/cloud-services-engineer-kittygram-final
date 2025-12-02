@@ -28,8 +28,8 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./static:/static
-      - ./media:/media
+      - static:/static
+      - media:/media
     depends_on:
       - backend
       - frontend

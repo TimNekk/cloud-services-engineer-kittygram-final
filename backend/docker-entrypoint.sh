@@ -7,6 +7,8 @@ until nc -z "postgres" "5432"; do
 done
 echo "PostgreSQL started"
 
+mkdir -p /app/collected_static /app/media
+
 python manage.py collectstatic --noinput
 
 python manage.py migrate --noinput

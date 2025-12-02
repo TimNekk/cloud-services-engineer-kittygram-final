@@ -8,6 +8,6 @@ RUN npm ci
 
 COPY . .
 RUN npm run build && \
-    npm install --global http-server
+    npm install --global serve
 
-CMD ["npx", "-y", "http-server", "-p", "8000", "/app/build"]
+CMD ["serve", "-s", "/app/build", "-l", "8000"]
