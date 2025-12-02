@@ -20,6 +20,8 @@ services:
 
   frontend:
     image: timnekk/kittygram_frontend:latest
+    volumes:
+      - static:/static
     networks:
       - kittygram_network
 

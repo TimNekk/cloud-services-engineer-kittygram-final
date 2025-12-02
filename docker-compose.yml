@@ -20,6 +20,8 @@ services:
 
   frontend:
     build: ./frontend/
+    volumes:
+      - static:/static
     networks:
       - kittygram_network
 

@@ -7,7 +7,7 @@ COPY package-lock.json package-lock.json
 RUN npm ci
 
 COPY . .
-RUN npm run build && \
-    npm install --global serve
+RUN npm run build
 
-CMD ["serve", "-s", "/app/build", "-l", "8000"]
+# Копируем собранные файлы в volume при запуске контейнера
+CMD ["sh", "-c", "cp -r /app/build/* /static/ && echo 'Frontend build copied to volume'"]
