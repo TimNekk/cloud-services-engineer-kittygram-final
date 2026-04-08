@@ -34,7 +34,7 @@ jobs:
       - name: Write authorized_key.json
         working-directory: ./infra
         run: |
-          echo "${{ secrets.AUTHORIZED_KEY }}" > authorized_key.json
+          echo "${{ secrets.AUTHORIZED_KEY_BASE64 }}" | base64 -d > authorized_key.json
       
       - name: Terraform Init
         working-directory: ./infra
