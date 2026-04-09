@@ -22,7 +22,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       TF_VAR_cloud_id: ${{ secrets.CLOUD_ID }}
       TF_VAR_folder_id: ${{ secrets.FOLDER_ID }}
-      TF_VAR_ssh_key: ${{ secrets.SSH_KEY }}
+      TF_VAR_ssh_key: ${{ secrets.SSH_PUB_KEY }}
 
     steps:
       - name: Checkout
@@ -34,7 +34,7 @@ jobs:
       - name: Write authorized_key.json
         working-directory: ./infra
         run: |
-          echo "${{ secrets.AUTHORIZED_KEY }}" > authorized_key.json
+          echo "${{ secrets.AUTHORIZED_KEY_BASE64 }}" | base64 -d > authorized_key.json
       
       - name: Terraform Init
         working-directory: ./infra

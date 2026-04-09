@@ -18,6 +18,11 @@ variable "vm_1_name" {
   default = "vm-kittygram"
 }
 
+variable "vm_1_user" {
+  type    = string
+  default = "user"
+}
+
 variable "platform_id" {
   type    = string
   default = "standard-v3"

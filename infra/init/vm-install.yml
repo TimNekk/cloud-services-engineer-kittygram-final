@@ -2,7 +2,7 @@
 ssh_pwauth: no
 
 users:
-  - name: user
+  - name: ${USERNAME}
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
     ssh_authorized_keys:
@@ -16,7 +16,7 @@ write_files:
       apt-get update
       apt-get install -y ca-certificates curl gnupg
       curl -fsSL https://get.docker.com | bash
-      usermod -aG docker user
+      usermod -aG docker ${USERNAME}
     path: "/root/vm_prep.sh"
     permissions: "0740"
 
