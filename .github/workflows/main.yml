@@ -116,8 +116,8 @@ jobs:
               id: get_server_credentials
               working-directory: ./infra
               run: |
-                  echo "ip=$(terraform output -raw vm_1_public_ip)" >> $GITHUB_OUTPUT &&
-                  echo "username=$(terraform output -raw vm_1_username)" >> $GITHUB_OUTPUT &&
+                  echo "ip=$(terraform output -raw vm_1_public_ip)" >> $GITHUB_OUTPUT
+                  echo "username=$(terraform output -raw vm_1_username)" >> $GITHUB_OUTPUT
 
             - name: Copy docker-compose.production.yml to server
               uses: appleboy/scp-action@master
